@@ -47,10 +47,10 @@ public class BedwarsAddonSelectShopDesign extends JavaPlugin {
 		
 		// register default icon
 		DESIGN_ICON.put(ShopDesignType.Normal.getData(), new ItemStack(Material.POTATO_ITEM));
-		DESIGN_ICON.put(ShopDesignType.GommeHD.getData(), Util.getSkullItemstack("GommeHD"));
+		DESIGN_ICON.put(ShopDesignType.GommeHD.getData(), Util.getSkullItemstack("GommeHD", 1));
 		DESIGN_ICON.put(ShopDesignType.HiveMC.getData(), new ItemStack(Material.GOLDEN_APPLE));
 		DESIGN_ICON.put(ShopDesignType.HyPixel.getData(), new ItemStack(Material.WOOD_SWORD));
-		DESIGN_ICON.put(ShopDesignType.Rewinside.getData(), Util.getSkullItemstack("Rewinside"));
+		DESIGN_ICON.put(ShopDesignType.Rewinside.getData(), Util.getSkullItemstack("Rewinside", 1));
 		
 		DESIGN_ICON_MISSING = new ItemStack(Material.SULPHUR);
 		

@@ -5,9 +5,8 @@ import org.bukkit.inventory.ItemStack;
 import de.marcely.bedwars.Language;
 import de.marcely.bedwars.api.BedwarsAPI;
 import de.marcely.bedwars.api.Util;
-import de.marcely.bedwars.config.ConfigManager;
-import de.marcely.bedwars.config.ConfigManager.MultiKey.MultiKeyEntry;
 import de.marcely.bedwars.game.shop.ShopDesignData;
+import de.marcely.configmanager2.ConfigManager;
 
 public class Config {
 	
@@ -17,28 +16,28 @@ public class Config {
 		cm.load();
 		
 		// load enabled designs
-		for(MultiKeyEntry<String, String> e:cm.getKeysWhichStartWith("design-enabled-").entrySet()){
-			final ShopDesignData design = BedwarsAPI.getShopDesign(e.getKey().replaceFirst("design-enabled-", ""));
+		for(de.marcely.configmanager2.objects.Config c:cm.getConfigsWhichStartWith("design-enabled-")){
+			final ShopDesignData design = BedwarsAPI.getShopDesign(c.getName().replaceFirst("design-enabled-", ""));
 			
-			if(design != null && Util.isBoolean(e.getValue()) && Boolean.valueOf(e.getValue()) == false)
+			if(design != null && Util.isBoolean(c.getValue()) && Boolean.valueOf(c.getValue()) == false)
 				BedwarsAddonSelectShopDesign.DESIGN_DISABLED.add(design);
 		}
 		
 		// load icons
-		for(MultiKeyEntry<String, String> e:cm.getKeysWhichStartWith("design-icon-").entrySet()){
-			final ShopDesignData design = BedwarsAPI.getShopDesign(e.getKey().replaceFirst("design-icon-", ""));
-			final ItemStack is = Util.getItemItemstackByName(e.getValue());
+		for(de.marcely.configmanager2.objects.Config c:cm.getConfigsWhichStartWith("design-icon-")){
+			final ShopDesignData design = BedwarsAPI.getShopDesign(c.getName().replaceFirst("design-icon-", ""));
+			final ItemStack is = Util.getItemItemstackByName(c.getValue());
 			
 			if(design != null && is != null)
 				BedwarsAddonSelectShopDesign.DESIGN_ICON.put(design, is);
 		}
 		
 		// load messages
-		for(MultiKeyEntry<String, String> e:cm.getKeysWhichStartWith("message-").entrySet()){
-			final Message msg = Message.getByName(e.getKey().replaceFirst("message-", ""));
+		for(de.marcely.configmanager2.objects.Config c:cm.getConfigsWhichStartWith("message-")){
+			final Message msg = Message.getByName(c.getName().replaceFirst("message-", ""));
 			
 			if(msg != null)
-				msg.setCustomMessage(Language.stringToChatColor(e.getValue()));
+				msg.setCustomMessage(Language.stringToChatColor(c.getValue()));
 		}
 		
 		cm.clear();
